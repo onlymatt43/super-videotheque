@@ -36,7 +36,6 @@ export default function PlayerModal({ video, onClose }: PlayerModalProps) {
       if (Hls.isSupported()) {
         const hls = new Hls({
           enableWorker: true,
-          lowLatencyMode: true,
         });
         
         hls.loadSource(videoUrl);
