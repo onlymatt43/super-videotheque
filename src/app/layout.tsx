@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Super Vidéothèque",
-  description: "Collection de vidéos exclusives",
+  description: "La collection exclusive de Matt",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
       <body className="bg-black text-white antialiased">
         {children}
         
-        {/* Subscribe newsletter script */}
+        {/* Subscribe-onlymatt newsletter script */}
         <Script
           src={`${process.env.NEXT_PUBLIC_SUBSCRIBE_URL}/subscribe-button.js`}
           strategy="afterInteractive"
