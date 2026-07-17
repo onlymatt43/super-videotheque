@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 export const revalidate = 300;
 
 export default async function Home() {
-  const videos = await getMedia().catch(() => []);
+  const videos = await getMedia();
 
   return (
     <div className="flex-1 flex flex-col justify-between">
@@ -19,7 +19,13 @@ export default async function Home() {
           </p>
         </header>
 
-        <VideoGrid videos={videos} />
+        {videos.length === 0 ? (
+          <div className="text-center py-16 border border-dashed border-zinc-800 rounded-2xl">
+            <p className="text-zinc-500 text-sm">Aucune vidéo disponible pour le moment.</p>
+          </div>
+        ) : (
+          <VideoGrid videos={videos} />
+        )}
       </main>
       <Footer />
     </div>
