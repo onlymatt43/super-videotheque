@@ -31,27 +31,34 @@ export default function PlayerModal({ video, onClose }: PlayerModalProps) {
     const videoEl = videoRef.current;
     const videoUrl = video.video_url;
 
+    console.log("[PlayerModal] Loading video:", videoUrl);
+
     // Vérifier si c'est une URL HLS
     if (videoUrl.includes('.m3u8')) {
       if (Hls.isSupported()) {
         const hls = new Hls({
           enableWorker: true,
+          xhrSetup: (xhr, url) => {
+            console.log("[HLS] Loading:", url);
+            xhr.withCredentials = false;
+          },
         });
         
         hls.loadSource(videoUrl);
         hls.attachMedia(videoEl);
         
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          console.log("[HLS] Manifest parsed, starting playback");
           videoEl.play().catch(err => {
-            console.error("Erreur de lecture:", err);
+            console.error("[HLS] Erreur de lecture:", err);
             setError("Impossible de lire la vidéo");
           });
         });
         
         hls.on(Hls.Events.ERROR, (event, data) => {
-          console.error("Erreur HLS:", data);
+          console.error("[HLS] Erreur HLS:", data);
           if (data.fatal) {
-            setError("Erreur de chargement de la vidéo");
+            setError(`Erreur de chargement: ${data.type} - ${data.details}`);
           }
         });
         
@@ -60,9 +67,10 @@ export default function PlayerModal({ video, onClose }: PlayerModalProps) {
         };
       } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
         // Safari natif supporte HLS
+        console.log("[PlayerModal] Using native HLS (Safari)");
         videoEl.src = videoUrl;
         videoEl.play().catch(err => {
-          console.error("Erreur de lecture:", err);
+          console.error("[PlayerModal] Erreur de lecture native:", err);
           setError("Impossible de lire la vidéo");
         });
       } else {
@@ -70,9 +78,10 @@ export default function PlayerModal({ video, onClose }: PlayerModalProps) {
       }
     } else {
       // Vidéo standard (MP4, etc.)
+      console.log("[PlayerModal] Loading standard video");
       videoEl.src = videoUrl;
       videoEl.play().catch(err => {
-        console.error("Erreur de lecture:", err);
+        console.error("[PlayerModal] Erreur de lecture:", err);
         setError("Impossible de lire la vidéo");
       });
     }

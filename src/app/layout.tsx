@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Super Vidéothèque",
   description: "La collection exclusive de Matt",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

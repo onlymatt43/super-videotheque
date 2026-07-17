@@ -50,6 +50,13 @@ export async function getMedia(): Promise<MediaItem[]> {
       const videoUrl = selectedFormat?.bunny_url || selectedFormat?.source_url;
       const thumbnailUrl = selectedFormat?.thumbnail_url || item.thumbnail_url;
       
+      console.log(`[readonly] Media ${item.id}:`, {
+        title: item.title,
+        videoUrl,
+        thumbnailUrl,
+        formats: Object.keys(formats),
+      });
+      
       return {
         id: item.id,
         title: item.title || "Sans titre",
