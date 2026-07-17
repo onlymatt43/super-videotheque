@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,6 +16,15 @@ export default function RootLayout({
     <html lang="fr">
       <body className="bg-black text-white antialiased">
         {children}
+        
+        {/* Subscribe newsletter script */}
+        <Script
+          src={`${process.env.NEXT_PUBLIC_SUBSCRIBE_URL}/subscribe-button.js`}
+          strategy="afterInteractive"
+        />
+        <Script id="subscribe-config" strategy="afterInteractive">
+          {`window.OM_PROJECT_SLUG = 'super-videotheque';`}
+        </Script>
       </body>
     </html>
   );

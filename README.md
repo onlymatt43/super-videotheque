@@ -18,7 +18,14 @@ READ_ONLY_URL=https://read-only.vercel.app
 READ_ONLY_SERVICE_KEY=your_key
 PAYMENT_ONLY_URL=https://payment.onlymatt.ca
 DEFAULT_PRODUCT_SLUG=super-videotheque
+NEXT_PUBLIC_SUBSCRIBE_URL=https://subscribe-onlymatt.vercel.app
 ```
+
+### Newsletter
+
+Le script de newsletter `subscribe-onlymatt` est automatiquement chargé sur toutes les pages. Il affiche un bouton d'abonnement en bas à droite de l'écran.
+
+Pour personnaliser le projet source, modifier `window.OM_PROJECT_SLUG` dans `app/layout.tsx`.
 
 ## Déploiement
 
