@@ -39,6 +39,16 @@ export default function VideoCard({ video, onClick }: VideoCardProps) {
             </svg>
           </div>
         )}
+        
+        {/* Play button - always visible */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+            <svg className="w-8 h-8 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+        
         {video.duration && (
           <div className="absolute bottom-2 right-2 bg-black/70 px-2 py-0.5 rounded text-[10px] font-mono tracking-tight text-zinc-300">
             {formatDuration(video.duration)}
